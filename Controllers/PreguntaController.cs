@@ -62,7 +62,7 @@ public class PreguntaController: Controller {
 		}
 	} [Route("/Foro/Crear")]
 	public IActionResult RegistrarPregunta(string titulo, string contexto) {
-		if (true) {
+		if (UsuarioController.validarLogin(HttpContext.Session.GetString("usuario"))) {
 			string username = "";
 			ViewBag.estadoGuardado = 2;
 			try {
