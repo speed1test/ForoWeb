@@ -28,6 +28,7 @@ ViewData["Title"] = "Home Page";
         @foreach (PreguntaModel item in ViewBag.preguntas)
         {
             <a type="button" class="list-group-item list-group-item-action" asp-action="VerPregunta" asp-controller="Pregunta" asp-route-idPregunta="@item.idPregunta">@item.tituloPregunta</a>
+            <a type="button" class="btn btn-warning" asp-action="VerLogs" asp-controller="Usuario">Visitas</a>
         }
    </div>
    }
