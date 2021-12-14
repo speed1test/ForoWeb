@@ -1,0 +1,35 @@
+@{
+    ViewData["Title"] = "Registro de Ingresos";
+}
+@section styles{ 
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+} 
+<center>
+    <h1>Registro de Ingresos al sitio</h1>
+    <img class="animate__animated animate__tada animate__infinite infinite" src="https://cdn-icons-png.flaticon.com/512/2015/2015046.png" width="10%" height="10%">
+</center>
+<p></p>
+<table class="table table-dark animate__animated animate__tada animate__delay-2s">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">UserName</th>
+      <th scope="col">Ip</th>
+      <th scope="col">Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (LogModel item in ViewBag.logs)
+    {
+    <tr>
+        <th scope="row">@item.idLog</th>
+        <td>@item.usuarioLog.nombreUsuario</td>
+        <td>@item.ipLog</td>
+        <td>@item.fechaLog</td>
+    </tr>
+    }
+  </tbody>
+</table>

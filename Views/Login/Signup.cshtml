@@ -2,13 +2,18 @@
     ViewData["Title"] = "Registro";
 }
 @if(ViewBag.estadoRegistro == 0){
-    <div class="alert alert-warning" role="alert">
+    <div class="alert alert-danger" role="alert">
         El usuario se encuentra registrado en nuestra base de datos, pruebe con otro.
     </div>
 }
 @if(ViewBag.estadoRegistro == 1){
     <div class="alert alert-success" role="alert">
         Registro exitoso!.
+    </div>
+}
+@if(ViewBag.estadoRegistro == 2){
+    <div class="alert alert-warning" role="alert">
+        Revise el formato de su usuario y/o contraseña.
     </div>
 }
 <form asp-controller="Usuario" asp-action="Registrar">

@@ -85,3 +85,18 @@ CREATE PROCEDURE dbo.sp_validar_usuario
 )
 AS 
 SELECT * FROM [USUARIO] WHERE NOMBREUSUARIO = @username;
+
+//sp_registrar_log
+CREATE PROCEDURE dbo.sp_registrar_log(
+	@username NVARCHAR(10) = NULL, 
+	@fechaUsuario DateTime = NULL, 
+	@ipUsuario NVARCHAR(16) = NULL
+)
+AS 
+INSERT INTO [LOG] (NOMBREUSUARIO,IPLOG, FECHALOG) 
+VALUES (@username, @ipUsuario, @fechaUsuario)
+
+//sp_obtener_logs
+CREATE PROCEDURE dbo.sp_obtener_logs
+AS 
+SELECT * FROM [LOG]

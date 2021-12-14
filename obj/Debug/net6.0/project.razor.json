@@ -16298,6 +16298,11 @@
   "RootNamespace": "ForoWeb",
   "Documents": [
     {
+      "FilePath": "c:\\Users\\edwin\\foro\\ForoWeb\\Views\\Log\\Index.cshtml",
+      "TargetPath": "Views\\Log\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\edwin\\foro\\ForoWeb\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"
@@ -16313,8 +16318,8 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\edwin\\foro\\ForoWeb\\Views\\Login\\signup.cshtml",
-      "TargetPath": "Views\\Login\\signup.cshtml",
+      "FilePath": "c:\\Users\\edwin\\foro\\ForoWeb\\Views\\Login\\Signup.cshtml",
+      "TargetPath": "Views\\Login\\Signup.cshtml",
       "FileKind": "mvc"
     },
     {
