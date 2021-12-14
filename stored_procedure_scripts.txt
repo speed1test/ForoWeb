@@ -1,0 +1,87 @@
+//sp_cambiar_estado
+CREATE PROCEDURE dbo.sp_cambiar_estado(
+	@idPregunta INT = NULL
+)
+AS 
+BEGIN
+	UPDATE [PREGUNTA]
+	SET ESTADOPREGUNTA = 0
+	WHERE IDPREGUNTA = @idPregunta
+END
+
+//sp_login_usuario
+CREATE PROCEDURE dbo.sp_login_usuario(
+	@username NVARCHAR(10),
+	@password NVARCHAR(50)
+)
+AS 
+SELECT * FROM [USUARIO] WHERE NOMBREUSUARIO = @username AND CONTRASENAUSUARIO=@password;
+
+//sp_obtener_pregunta
+CREATE PROCEDURE dbo.sp_obtener_pregunta( 
+	@idPregunta INT = NULL 
+) 
+AS 
+SELECT * FROM [PREGUNTA] WHERE IDPREGUNTA=@idPregunta;
+
+//sp_obtener_preguntas
+CREATE PROCEDURE dbo.sp_obtener_preguntas
+AS 
+SELECT * FROM [PREGUNTA] 
+ORDER BY ACTUALIZACIONPREGUNTA DESC;
+
+//sp_obtener_usuario
+CREATE PROCEDURE dbo.sp_obtener_usuario
+(
+	@username NVARCHAR(10)
+)
+AS 
+SELECT * FROM [USUARIO] WHERE NOMBREUSUARIO = @username;
+
+//sp_obtenter_respuestas
+CREATE PROCEDURE dbo.sp_obtenter_respuestas(
+	@idPregunta INT = NULL 
+)
+AS 
+SELECT * FROM [RESPUESTA] WHERE IDPREGUNTA=@idPregunta
+
+//sp_registrar_pregunta
+CREATE PROCEDURE dbo.sp_registrar_pregunta(
+	@username NVARCHAR(10),
+	@tituloPregunta NVARCHAR(100),
+	@contextoPregunta NVARCHAR(300),
+	@fechaPregunta DateTime = NULL
+)
+AS 
+INSERT INTO [PREGUNTA] (ESTADOPREGUNTA, CONTEXTOPREGUNTA, ACTUALIZACIONPREGUNTA, NOMBREUSUARIO, TITULOPREGUNTA)
+VALUES (1,@contextoPregunta,@fechaPregunta,@username, @tituloPregunta) 
+
+//sp_registrar_respuesta
+CREATE PROCEDURE dbo.sp_registrar_respuesta(
+	@idPregunta INT = NULL,
+	@username NVARCHAR(10),
+	@contextoRespuesta NVARCHAR(300),
+	@fechaRespuesta DateTime = NULL
+)
+AS 
+INSERT INTO [RESPUESTA] (IDPREGUNTA, NOMBREUSUARIO, CONTEXTORESPUESTA, ACTUALIZACIONRESPUESTA)
+VALUES (@idPregunta, @username, @contextoRespuesta,@fechaRespuesta) 
+
+//sp_registrar_usuario
+CREATE PROCEDURE dbo.sp_registrar_usuario(
+	@username NVARCHAR(10),
+	@password NVARCHAR(50)
+)
+AS 
+BEGIN 
+	INSERT INTO [USUARIO] 
+	VALUES (@username, @password) 
+END
+
+//sp_validar_usuario
+CREATE PROCEDURE dbo.sp_validar_usuario
+(
+	@username NVARCHAR(10)
+)
+AS 
+SELECT * FROM [USUARIO] WHERE NOMBREUSUARIO = @username;

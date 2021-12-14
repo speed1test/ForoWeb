@@ -16356,6 +16356,11 @@
       "FilePath": "c:\\Users\\edwin\\foro\\ForoWeb\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\edwin\\foro\\ForoWeb\\Views\\Foro\\Crear.cshtml",
+      "TargetPath": "Views\\Foro\\Crear.cshtml",
+      "FileKind": "mvc"
     }
   ],
   "SerializationFormat": "0.2"

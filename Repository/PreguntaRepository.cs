@@ -83,43 +83,67 @@ namespace Pregunta.Repository
            }
            return preg;
        }
-       public static bool registrarRespuesta(String idPregunta, string username, string contexto, DateTime fecha)
+       public static bool inactivarPregunta(int idPregunta)
        {
-           bool flag = false;
+           bool flag = true;
            try{
-           RespuestaModel respuesta = new RespuestaModel();
-           SqlConnection con = new SqlConnection();
-           con.ConnectionString = Global.getConnectionString();
+                SqlConnection con = new SqlConnection();
+                con.ConnectionString = Global.getConnectionString();
 
-           SqlParameter idPreg = new SqlParameter();
-           idPreg.ParameterName = "@idPregunta"; 
-           idPreg.Value = idPreg;
+                SqlParameter idPre = new SqlParameter();
+                idPre.ParameterName = "@idPregunta"; 
+                idPre.Value = idPregunta; 
 
-           SqlParameter user = new SqlParameter();
-           user.ParameterName = "@username"; 
-           user.Value = username;
-
-           SqlParameter context = new SqlParameter();
-           context.ParameterName = "@contextoRespuesta"; 
-           context.Value = contexto;
-
-           SqlParameter date = new SqlParameter();
-           date.ParameterName = "@fechaRespuesta"; 
-           date.Value = fecha;
-
-           List<SqlParameter> listadoParametros = new List<SqlParameter>(){
-                    idPreg,
-                    user,
-                    context,
-                    date
-            };
-            ejecucionSP.ExecuteSPWithNoDataReturn("sp_registrar_respuesta", listadoParametros, con, ref flag);
+                List<SqlParameter> listadoParametros = new List<SqlParameter>(){
+                    idPre
+                };
+                ejecucionSP.ExecuteSPWithNoDataReturn("sp_cambiar_estado", listadoParametros, con, ref flag);
            }
-           catch
-           {
-
+           catch{
+               Console.WriteLine("Algo salio mal, cuando se intentaba cambiar el estado de la pregunta...");
            }
            return flag;
        }
+       public static bool guardarPregunta(string tituloPregunta, string contextoPregunta, string nombreUsuario)
+       {
+           bool flag = false; 
+           string username = "";
+           try{
+                SqlConnection con = new SqlConnection();
+                con.ConnectionString = Global.getConnectionString();
+
+                SqlParameter tituloPreg = new SqlParameter();
+                tituloPreg.ParameterName = "@tituloPregunta"; 
+                tituloPreg.Value = tituloPregunta.ToString(); 
+
+                SqlParameter contextoPreg = new SqlParameter();
+                contextoPreg.ParameterName = "@contextoPregunta"; 
+                contextoPreg.Value = contextoPregunta.ToString();
+
+                SqlParameter userPreg = new SqlParameter();
+                userPreg.ParameterName = "@username"; 
+                username = Regex.Replace(nombreUsuario, @"\s", "");
+                userPreg.Value = nombreUsuario.ToString();
+
+                SqlParameter fechaPreg = new SqlParameter();
+                fechaPreg.ParameterName = "@fechaPregunta"; 
+                fechaPreg.Value = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
+
+                List<SqlParameter> listadoParametros = new List<SqlParameter>(){
+                    tituloPreg,
+                    contextoPreg,
+                    userPreg,
+                    fechaPreg
+                };
+
+                ejecucionSP.ExecuteSPWithNoDataReturn("sp_registrar_pregunta", listadoParametros, con, ref flag);
+            }
+            catch
+            {
+                Console.WriteLine("Algo salio mal registrando la pregunta... ");
+            }
+            return flag;
+       }
+       
     }
 }

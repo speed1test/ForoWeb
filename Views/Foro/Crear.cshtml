@@ -1,0 +1,40 @@
+@{
+ViewData["Title"] = "Crear Pregunta";
+}
+@section styles{ 
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+} 
+@if(ViewBag.estadoGuardado==0)
+{
+    <div class="alert alert-danger" role="alert">
+        Algo salio mal!
+    </div>
+}
+@if(ViewBag.estadoGuardado==1){
+    <div class="alert alert-success" role="alert">
+        Guardado exitoso!
+    </div>
+}
+<center>
+    <img class="animate__animated animate__bounce animate__infinite	infinite" src="https://2.bp.blogspot.com/-cw7qrl63RkE/XHAvkSPhIGI/AAAAAAAAnqs/cZCd4Ngc47Amjq74VM27SQlQksb7YxOpACLcBGAs/s1600/preguntas2.jpg" width="10%" height="10%">
+    <h1>¿Tienes dudas? Consúltala en la comunidad :)</h1>
+    <form method="post" id="PreguntarForm" asp-action="RegistrarPregunta" asp-controller="Pregunta">
+            <p><strong>Titulo de Pregunta: </strong></p>
+            <input class="form-control form-control-lg" type="text" placeholder="Ejemplo: ¿Qué es Bit Flop?" minlength="1" maxlength="100" name="titulo" required>
+            <small>Max: 100 Caracteres</small>
+            <p></p>
+            <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Detalles</span>
+            </div>
+            <textarea class="form-control" aria-label="With textarea" name="contexto" required minlength="1" maxlength="300" required></textarea>
+            <p></p>
+            </div>
+            <small>Max: 300 Caracteres</small>
+    </form>
+    <p></p>
+    <button type="submit" form="PreguntarForm" class="btn btn-primary animate__animated animate__tada animate__delay-5s">Enviar</b>
+</center>

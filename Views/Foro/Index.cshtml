@@ -7,29 +7,43 @@ ViewData["Title"] = @ViewBag.titulo;
     <h1>@ViewBag.titulo</h1>
     <p><strong><i class="fas fa-calendar-day"></i> @ViewBag.fecha </strong></p>
     <p><i class="fas fa-user"></i> @ViewBag.usuario </p>
-    @if(@ViewBag.estado==1){
-        <a type="button" class="btn btn-warning">Cerrar Pregunta</a>
+    @if(@ViewBag.estado==1 && ViewBag.boolRespuesta){
+        <a type="button" class="btn btn-warning" asp-controller="Pregunta" asp-action="cerrarPregunta" asp-route-idPregunta="@ViewBag.idPregunta">Cerrar Pregunta</a>
     }
 </center>
+<h5>Contexto:</h5>
+<p></p>
 <p><strong>@ViewBag.contexto</strong></p>
 <hr>
 <center><h5>Espacio de respuestas: </h5></center>
 <p></p>
-<form method="post" id="ResponderForm" asp-action="RegistrarRespuesta" asp-controller="Respuesta">
-    <div class="input-group">
-    <div class="input-group-prepend">
-        <span class="input-group-text">Responder</span>
-    </div>
-    <textarea class="form-control" aria-label="With textarea" name="contexto" required minlength="1" maxlength="300"></textarea>
-    <input type="hidden" name="idPregunta" value=@ViewBag.idPregunta>
-    </div>
-</form>
-<center>
+@if(ViewBag.boolRespuesta){
+    <form method="post" id="ResponderForm" asp-action="RegistrarRespuesta" asp-controller="Respuesta">
+            <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Responder</span>
+            </div>
+            <textarea class="form-control" aria-label="With textarea" name="contexto" required minlength="1" maxlength="300"></textarea>
+            <input type="hidden" name="idPregunta" value=@ViewBag.idPregunta>
+        </div>
+    </form>
+    <center>
     <p></p>
     <button type="submit" class="btn btn-primary" form="ResponderForm">Enviar</button>
-</center>
+    </center>
+}
+
+
 @foreach (RespuestaModel item in ViewBag.respuestas)
 {
-    <p><i class="fas fa-user" style="background-color:Red;"></i> @item.usuarioRespuesta.nombreUsuario:</p>
-    <p>@item.contextoRespuesta</p>
+    @if(@item.usuarioRespuesta.nombreUsuario == @ViewBag.usuario){
+        <p><i class="fas fa-user" style="background-color:Red; color: #b8e1bb;"></i> @item.usuarioRespuesta.nombreUsuario <strong>[Autor]</strong>:</p>
+        <p>@item.contextoRespuesta</p>
+    }
+    else
+    {
+        <p><i class="fas fa-user" style="background-color:Yellow; color: Purple;"></i> @item.usuarioRespuesta.nombreUsuario:</p>
+        <p>@item.contextoRespuesta</p>
+    }
+    
 }

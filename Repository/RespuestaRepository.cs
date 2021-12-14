@@ -60,8 +60,7 @@ namespace Respuesta.Repository
        }
        public static List<RespuestaModel> obtenerRespuestas(int idPregunta)
        {
-           RespuestaModel resp = new RespuestaModel();
-           List<RespuestaModel> objetos = new List<RespuestaModel>();
+           List<RespuestaModel> respuestas = new List<RespuestaModel>(){};
            try
            {
                SqlConnection con = new SqlConnection();
@@ -76,10 +75,10 @@ namespace Respuesta.Repository
                 DataTable objetoSalida = ejecucionSP.ExecuteSPWithDataReturn("dbo.sp_obtenter_respuestas", listadoParametros, con);
                 if (objetoSalida.Rows.Count > 0)
                 {
-                    
                     for (int i = 0; i < objetoSalida.Rows.Count ; i++)
                     {
                         UsuarioModel usuario = new UsuarioModel();
+                        RespuestaModel resp = new RespuestaModel();
                         string username = "";
                         resp.idRespuesta = Convert.ToInt32(objetoSalida.Rows[i]["IDRESPUESTA"]);
                         resp.contextoRespuesta = objetoSalida.Rows[i]["CONTEXTORESPUESTA"].ToString();
@@ -88,7 +87,8 @@ namespace Respuesta.Repository
                         usuario.nombreUsuario = username;
                         resp.usuarioRespuesta = usuario;
                         //Console.WriteLine(resp.contextoRespuesta);
-                        objetos.Add(resp);
+                        respuestas.Add(resp);
+                        //Console.WriteLine(respuestas[i].contextoRespuesta);
                     }
 
                 }
@@ -97,7 +97,7 @@ namespace Respuesta.Repository
            {
                Console.WriteLine("Algo salio mal mientras obteniendo los datos de la pregunta...");
            }
-           return objetos;
+           return respuestas;
        }
     }
 }
