@@ -49,7 +49,7 @@ public class PreguntaController: Controller {
 			}
 			catch {
 
-}
+			}
 			var routeValue = new RouteValueDictionary(new {
 				action = "VerPregunta",
 				controller = "Pregunta",
@@ -62,7 +62,7 @@ public class PreguntaController: Controller {
 		}
 	} [Route("/Foro/Crear")]
 	public IActionResult RegistrarPregunta(string titulo, string contexto) {
-		if (UsuarioController.validarLogin(HttpContext.Session.GetString("usuario"))) {
+		if (true) {
 			string username = "";
 			ViewBag.estadoGuardado = 2;
 			try {
