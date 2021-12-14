@@ -1,0 +1,35 @@
+@{
+ViewData["Title"] = @ViewBag.titulo;
+}
+@section styles{ 
+} 
+<center>
+    <h1>@ViewBag.titulo</h1>
+    <p><strong><i class="fas fa-calendar-day"></i> @ViewBag.fecha </strong></p>
+    <p><i class="fas fa-user"></i> @ViewBag.usuario </p>
+    @if(@ViewBag.estado==1){
+        <a type="button" class="btn btn-warning">Cerrar Pregunta</a>
+    }
+</center>
+<p><strong>@ViewBag.contexto</strong></p>
+<hr>
+<center><h5>Espacio de respuestas: </h5></center>
+<p></p>
+<form method="post" id="ResponderForm" asp-action="RegistrarRespuesta" asp-controller="Respuesta">
+    <div class="input-group">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Responder</span>
+    </div>
+    <textarea class="form-control" aria-label="With textarea" name="contexto" required minlength="1" maxlength="300"></textarea>
+    <input type="hidden" name="idPregunta" value=@ViewBag.idPregunta>
+    </div>
+</form>
+<center>
+    <p></p>
+    <button type="submit" class="btn btn-primary" form="ResponderForm">Enviar</button>
+</center>
+@foreach (RespuestaModel item in ViewBag.respuestas)
+{
+    <p><i class="fas fa-user" style="background-color:Red;"></i> @item.usuarioRespuesta.nombreUsuario:</p>
+    <p>@item.contextoRespuesta</p>
+}
